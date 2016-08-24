@@ -28,9 +28,9 @@ public class FileUtil {
             fileReader = new FileReader(file);
             reader = new BufferedReader(fileReader);
             String line = reader.readLine();
-            if(line!=null){
-                line = reader.readLine();
+            while(line!=null){
                 result.append(line);
+                line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -54,7 +54,13 @@ public class FileUtil {
         }
         return result.toString();
     }
+    public static boolean isFile(String path,String fileName){
+        return new File(path+"/"+fileName).isFile();
+    }
+    public static boolean isFile(String path){
+        return new File(path).isFile();
+    }
     public static void main(String[] args) {
-
+        System.out.println(FileUtil.read("../httpfairy/http/get/test.txt"));
     }
 }

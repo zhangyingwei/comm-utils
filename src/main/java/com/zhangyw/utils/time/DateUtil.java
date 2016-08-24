@@ -50,6 +50,16 @@ public class DateUtil {
 		calendar.add(Calendar.DATE, dayAmount);
 		return calendar.getTimeInMillis()/1000;
 	}
+	public static long getBeginOfDayTimeStamp(int dayAmount){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.add(Calendar.DATE, dayAmount);
+		return calendar.getTimeInMillis()/1000;
+	}
+
 	
 	public static boolean isYesterDay(Date date){
 		if(date!=null){
