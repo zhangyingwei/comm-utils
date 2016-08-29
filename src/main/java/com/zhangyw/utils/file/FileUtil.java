@@ -54,13 +54,65 @@ public class FileUtil {
         }
         return result.toString();
     }
-    public static boolean isFile(String path,String fileName){
-        return new File(path+"/"+fileName).isFile();
+    public static String read(String path,String encoding){
+        StringBuffer result = new StringBuffer();
+        File file = new File(path);
+        InputStream input = null;
+        InputStreamReader in = null;
+        BufferedReader reader = null;
+        try {
+            input = new FileInputStream(file);
+            in = new InputStreamReader(input,encoding);
+            reader = new BufferedReader(in);
+            String line = reader.readLine();
+            while(line!=null){
+                result.append(line);
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(input!=null){
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(in!=null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(reader!=null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result.toString();
     }
     public static boolean isFile(String path){
         return new File(path).isFile();
     }
+    public static boolean isFile(String path,String fileName){
+        return isFile(path+"/"+fileName);
+    }
+    public static boolean isDirectory(String path){
+        return new File(path).isDirectory();
+    }
+    public static boolean isDirectory(String path,String fileName){
+        return isDirectory(path+"/"+fileName);
+    }
     public static void main(String[] args) {
-        System.out.println(FileUtil.read("../httpfairy/http/get/test.txt"));
+        System.out.println(FileUtil.read("./src/test/resources/test.txt","gbk"));
     }
 }
