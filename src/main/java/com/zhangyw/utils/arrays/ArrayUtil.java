@@ -1,5 +1,11 @@
 package com.zhangyw.utils.arrays;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.log4j.chainsaw.Main;
+
 public class ArrayUtil{
 	public static int[] intArray(int size){
 		return new int[size];
@@ -27,5 +33,12 @@ public class ArrayUtil{
 	}
 	public static char[] charArray(int size){
 		return new char[size];
+	}
+	public static int sum(int[] intArr){
+		int sum = 0;
+		for(int i = 0;i<intArr.length;i++){
+			sum+=intArr[i];
+		}
+		return sum;
 	}
 }
