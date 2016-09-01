@@ -427,6 +427,15 @@ public class StringUtil {
 	public static boolean isEmpty(String str) {
 		return str == null || str.trim().length() == 0;
 	}
+	/**
+	 * 功能描述：是否不为空白;
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNotEmpty(String str) {
+		return str != null && str.trim().length() > 0;
+	}
 
 	/**
 	 * 功能描述：判断是否为质数
@@ -667,6 +676,8 @@ public class StringUtil {
 	public static String changeEncode(String str,String fromEncode,String toEncode) throws UnsupportedEncodingException{
 		return new String(str.getBytes(fromEncode),toEncode);
 	}
-	
+	public static String newEmptyString(){
+		return new String("");
+	}
 	
 }
