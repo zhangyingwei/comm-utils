@@ -1,5 +1,6 @@
 package com.zhangyw.utils.time;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,14 +13,31 @@ import com.zhangyw.utils.exception.TimeStringFormateException;
 public class DateUtil {
 	private static Logger logger = Logger.getLogger(DateUtil.class);
 	
+	/**
+	 * get date from string
+	 * @param dateStr
+	 * @return Date
+	 * @throws TimeStringFormateException
+	 */
 	public static Date getDate(String dateStr) throws TimeStringFormateException{
 		return TimeUtil.fromString(dateStr).getTime();
 	}
 	
+	/**
+	 * get date from long<br/>the start time is Thu Jan 01 08:00:00 CST 1970
+	 * @param datetime
+	 * @return Date
+	 */
 	public static Date getDate(long datetime){
 		return new Date(datetime);
 	}
 	
+	/**
+	 * get date from string and formate with pattern
+	 * @param dateStr
+	 * @param pattern
+	 * @return Date
+	 */
 	public static Date getDate(String dateStr,String pattern){
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		Date result = null;
@@ -31,6 +49,10 @@ public class DateUtil {
 		return result;
 	}
 	
+	/**
+	 * get current timestamp
+	 * @return
+	 */
 	public static long getCurrentTimeStamp(){
 		return new Date().getTime()/1000;
 	}
@@ -41,6 +63,10 @@ public class DateUtil {
 	
 	public static String getCurrentTime(String pattern){
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		return format.format(new Date());
+	}
+	
+	public static String getCurrentTime(DateFormat format){
 		return format.format(new Date());
 	}
 	
@@ -79,5 +105,7 @@ public class DateUtil {
 	public static boolean isYesterDay(long timestatmp){
 		return isYesterDay(getDate(timestatmp));
 	}
-	
+	public static void main(String[] args) {
+		System.out.println(DateUtil.getDate(0l));
+	}
 }

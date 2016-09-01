@@ -1,6 +1,7 @@
 package com.zhangyw.utils.file;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 
 /**
@@ -100,6 +101,23 @@ public class FileUtil {
         }
         return result.toString();
     }
+    public static void write(String path,String content){
+    	File file = new File(path);
+    	
+    }
+    public static void createFile(String path) throws IOException{
+    	File file = new File(path);
+    	if(file.exists()){
+    		throw new FileAlreadyExistsException("file is already exist");
+    	}else{
+    		mkDirs(file.getParent());
+    		file.createNewFile();
+    	}
+    }
+    public static void mkDirs(String path){
+    	File file = new File(path);
+    	file.mkdirs();
+    }
     public static boolean isFile(String path){
         return new File(path).isFile();
     }
@@ -111,8 +129,5 @@ public class FileUtil {
     }
     public static boolean isDirectory(String path,String fileName){
         return isDirectory(path+"/"+fileName);
-    }
-    public static void main(String[] args) {
-        System.out.println(FileUtil.read("./src/test/resources/test.txt","gbk"));
     }
 }

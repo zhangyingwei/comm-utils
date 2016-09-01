@@ -184,7 +184,7 @@ public class StringUtil {
 	 *            String 原始字符串
 	 * @return String 替换后的字符串
 	 */
-	private static  String htmlEncode(String str) {
+	public static  String htmlEncode(String str) {
 		if (str == null) {
 			return null;
 		}
@@ -215,7 +215,7 @@ public class StringUtil {
 	 * @param str String
 	 * @return String
 	 */
-	private static  String htmlDecode(String str) {
+	public static  String htmlDecode(String str) {
 		if (str == null) {
 			return null;
 		}
@@ -413,7 +413,7 @@ public class StringUtil {
 	 *            传入的字符窜
 	 * @return 如果是纯汉字返回true,否则返回false
 	 */
-	public boolean isChinese(String str) {
+	public static boolean isChinese(String str) {
 		Pattern pattern = Pattern.compile("[\u0391-\uFFE5]+$");
 		return pattern.matcher(str).matches();
 	}
@@ -434,7 +434,7 @@ public class StringUtil {
 	 * @param x
 	 * @return
 	 */
-	public boolean isPrime(int x) {
+	public static boolean isPrime(int x) {
 		if (x <= 7) {
 			if (x == 2 || x == 3 || x == 5 || x == 7)
 				return true;
@@ -556,7 +556,7 @@ public class StringUtil {
 	 * @param str 原字符串，如果有子字符串则用空格隔开以表示子字符串
 	 * @return String 返回去掉重复子字符串后的字符串
 	 */
-	private static  String removeSameString(String str) {
+	public static  String removeSameString(String str) {
 		Set mLinkedSet = new LinkedHashSet();// set集合的特征：其子集不可以重复
 		String[] strArray = str.split(" ");// 根据空格(正则表达式)分割字符串
 		StringBuffer sb = new StringBuffer();
@@ -577,7 +577,7 @@ public class StringUtil {
 	 * @param src
 	 * @return
 	 */
-	private static  String encoding(String src) {
+	public static  String encoding(String src) {
 		if (src == null)
 			return "";
 		StringBuilder result = new StringBuilder();
@@ -627,7 +627,7 @@ public class StringUtil {
 	 * @param handset
 	 * @return boolean
 	 */
-	public boolean isPhoneNum(String phonenum) {
+	public static boolean isPhoneNum(String phonenum) {
 		try {
 			String regex = "^1[\\d]{10}$";
 			Pattern pattern = Pattern.compile(regex);
@@ -644,7 +644,7 @@ public class StringUtil {
 	 * @param src
 	 * @return
 	 */
-	private static  String decoding(String src) {
+	public static  String decoding(String src) {
 		if (src == null)
 			return "";
 		String result = src;
@@ -655,5 +655,18 @@ public class StringUtil {
 		result = result.replace("&shap;", "#").replace("&ques", "?");
 		return result;
 	}
+	
+	/**
+	 * 改变字符串编码格式
+	 * @param str
+	 * @param fromEncode
+	 * @param toEncode
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String changeEncode(String str,String fromEncode,String toEncode) throws UnsupportedEncodingException{
+		return new String(str.getBytes(fromEncode),toEncode);
+	}
+	
 	
 }
