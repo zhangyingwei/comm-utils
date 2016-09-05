@@ -2,7 +2,8 @@ package com.zhangyw.utils.file;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zhangyw on 2016/8/23.
@@ -19,7 +20,7 @@ public class FileUtil {
             }
         });
     }
-    public static String read(String path){
+    public static String readText(String path){
         File file = null;
         FileReader fileReader = null;
         BufferedReader reader = null;
@@ -55,7 +56,7 @@ public class FileUtil {
         }
         return result.toString();
     }
-    public static String read(String path,String encoding){
+    public static String readText(String path,String encoding){
         StringBuffer result = new StringBuffer();
         File file = new File(path);
         InputStream input = null;
@@ -100,6 +101,88 @@ public class FileUtil {
             }
         }
         return result.toString();
+    }
+    public static List<String> readArr(String path){
+        File file = null;
+        FileReader fileReader = null;
+        BufferedReader reader = null;
+        List list = new ArrayList<String>();
+        try {
+            file = new File(path);
+            fileReader = new FileReader(file);
+            reader = new BufferedReader(fileReader);
+            String line = reader.readLine();
+            while(line!=null){
+                list.add(line);
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(reader!=null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(fileReader!=null){
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+    public static List<String> readArr(String path,String encoding){
+        List<String> list = new ArrayList<String>();
+        File file = new File(path);
+        InputStream input = null;
+        InputStreamReader in = null;
+        BufferedReader reader = null;
+        try {
+            input = new FileInputStream(file);
+            in = new InputStreamReader(input,encoding);
+            reader = new BufferedReader(in);
+            String line = reader.readLine();
+            while(line!=null){
+                list.add(line);
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(input!=null){
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(in!=null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(reader!=null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
     }
     public static void write(String path,String content){
     	File file = new File(path);
