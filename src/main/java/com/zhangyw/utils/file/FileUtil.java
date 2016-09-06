@@ -2,8 +2,8 @@ package com.zhangyw.utils.file;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by zhangyw on 2016/8/23.
@@ -102,18 +102,18 @@ public class FileUtil {
         }
         return result.toString();
     }
-    public static List<String> readArr(String path){
+    public static Set<String> readArr(String path){
         File file = null;
         FileReader fileReader = null;
         BufferedReader reader = null;
-        List list = new ArrayList<String>();
+        Set<String> endset = new HashSet<String>();
         try {
             file = new File(path);
             fileReader = new FileReader(file);
             reader = new BufferedReader(fileReader);
             String line = reader.readLine();
             while(line!=null){
-                list.add(line);
+                endset.add(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
@@ -136,10 +136,10 @@ public class FileUtil {
                 }
             }
         }
-        return list;
+        return endset;
     }
-    public static List<String> readArr(String path,String encoding){
-        List<String> list = new ArrayList<String>();
+    public static Set<String> readArr(String path,String encoding){
+        Set<String> endset = new HashSet<String>();
         File file = new File(path);
         InputStream input = null;
         InputStreamReader in = null;
@@ -150,7 +150,7 @@ public class FileUtil {
             reader = new BufferedReader(in);
             String line = reader.readLine();
             while(line!=null){
-                list.add(line);
+                endset.add(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
@@ -182,7 +182,7 @@ public class FileUtil {
                 }
             }
         }
-        return list;
+        return endset;
     }
     public static void write(String path,String content){
     	File file = new File(path);
