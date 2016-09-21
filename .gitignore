@@ -1,4 +1,5 @@
 .class
+<<<<<<< HEAD
 *.class
 .idea
 *.idea
@@ -6,3 +7,10 @@
 /target
 .iml
 *.iml
+=======
+.idea
+/.idea
+/target
+.iml
+.iml
+>>>>>>> 8cde905e9021f3aab37910949a6e6cd1832027b8
