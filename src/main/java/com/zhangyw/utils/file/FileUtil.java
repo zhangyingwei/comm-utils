@@ -185,8 +185,42 @@ public class FileUtil {
         return endset;
     }
     public static void write(String path,String content){
+        if(!isExists(path)){
+            try {
+                createFile(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     	File file = new File(path);
-    	
+        OutputStream outputStream = null;
+        BufferedOutputStream out = null;
+        try {
+            outputStream = new FileOutputStream(file);
+            out = new BufferedOutputStream(outputStream);
+            out.write(content.getBytes());
+            out.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(outputStream!=null){
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(out!=null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
     public static void createFile(String path) throws IOException{
     	File file = new File(path);
@@ -200,6 +234,9 @@ public class FileUtil {
     public static void mkDirs(String path){
     	File file = new File(path);
     	file.mkdirs();
+    }
+    public static boolean isExists(String path){
+        return new File(path).exists();
     }
     public static boolean isFile(String path){
         return new File(path).isFile();
