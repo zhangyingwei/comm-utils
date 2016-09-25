@@ -1,7 +1,5 @@
 package com.zhangyw.utils.common;
 
-import java.util.Objects;
-
 /**
  * Created by zhangyw on 2016/9/14.
  */
