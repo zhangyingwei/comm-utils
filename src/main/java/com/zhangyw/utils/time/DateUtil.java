@@ -52,6 +52,7 @@ public class DateUtil {
             return toFormat.format(fromFormat.parse(time));
         } catch (ParseException e) {
             e.printStackTrace();
+            return null;
         }
     }
 	/**
