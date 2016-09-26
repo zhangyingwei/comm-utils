@@ -44,6 +44,16 @@ public class DateUtil {
 		}
 		return result;
 	}
+
+	public static String format(String time,String fromPatten,String toPatten){
+        SimpleDateFormat fromFormat = new SimpleDateFormat(fromPatten);
+        SimpleDateFormat toFormat = new SimpleDateFormat(toPatten);
+        try {
+            return toFormat.format(fromFormat.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 	/**
 	 * get current timestamp
 	 * @return
