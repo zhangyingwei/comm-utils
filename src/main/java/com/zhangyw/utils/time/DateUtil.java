@@ -45,6 +45,12 @@ public class DateUtil {
 		return result;
 	}
 
+    /**
+     * @param time
+     * @param fromPatten
+     * @param toPatten
+     * @return
+     */
 	public static String format(String time,String fromPatten,String toPatten){
         SimpleDateFormat fromFormat = new SimpleDateFormat(fromPatten);
         SimpleDateFormat toFormat = new SimpleDateFormat(toPatten);
@@ -55,6 +61,11 @@ public class DateUtil {
             return null;
         }
     }
+
+    public static String format(Long timestatmp,String patten){
+        return new SimpleDateFormat(patten).format(new Date(timestatmp));
+    }
+
 	/**
 	 * get current timestamp
 	 * @return
@@ -71,6 +82,20 @@ public class DateUtil {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		return format.format(new Date());
 	}
+
+    public static String getTime(String pattern,int dayAmount){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, dayAmount);
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(calendar.getTime());
+    }
+    public static String getTime(DateFormat format,int dayAmount){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, dayAmount);
+        return format.format(calendar.getTime());
+    }
 
 	public static String getCurrentTime(DateFormat format){
 		return format.format(new Date());

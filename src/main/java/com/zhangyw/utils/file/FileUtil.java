@@ -250,4 +250,7 @@ public class FileUtil {
     public static boolean isDirectory(String path,String fileName){
         return isDirectory(path+"/"+fileName);
     }
+    public static InputStream open(String path) throws FileNotFoundException {
+        return new FileInputStream(new File(path));
+    }
 }
