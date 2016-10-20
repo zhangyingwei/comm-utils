@@ -9,6 +9,11 @@ import java.util.Set;
  * Created by zhangyw on 2016/8/23.
  */
 public class FileUtil {
+    /**
+     * list files
+     * @param path
+     * @return String[]
+     */
     public static String[] listFiles(String path){
         return new File(path).list();
     }
@@ -20,7 +25,7 @@ public class FileUtil {
             }
         });
     }
-    public static String readText(String path){
+    public static String read(String path){
         File file = null;
         FileReader fileReader = null;
         BufferedReader reader = null;
@@ -56,7 +61,23 @@ public class FileUtil {
         }
         return result.toString();
     }
-    public static String readText(String path,String encoding){
+    public static String read(InputStream in){
+        StringBuffer result = new StringBuffer();
+        try {
+            byte[] bytes = new byte[in.available()];
+            while(true){
+                int length = in.read(bytes);
+                if(length<=0){
+                    break;
+                }
+            }
+            return new String(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    public static String read(String path,String encoding){
         StringBuffer result = new StringBuffer();
         File file = new File(path);
         InputStream input = null;
@@ -102,7 +123,7 @@ public class FileUtil {
         }
         return result.toString();
     }
-    public static Set<String> readArr(String path){
+    public static Set<String> readLineAsArr(String path){
         File file = null;
         FileReader fileReader = null;
         BufferedReader reader = null;
@@ -138,7 +159,7 @@ public class FileUtil {
         }
         return endset;
     }
-    public static Set<String> readArr(String path,String encoding){
+    public static Set<String> readLineAsArr(String path,String encoding){
         Set<String> endset = new HashSet<String>();
         File file = new File(path);
         InputStream input = null;
